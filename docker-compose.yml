@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  my-mongo-database:
+    image: mongo:latest
+    container_name: mongodb-container
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root123
+      MONGO_INITDB_DATABASE: users
+
+  flask-web-app:
+    build: .
+    container_name: flask-app-container
+    ports:
+      - "8081:8081"
+    depends_on:
+      - my-mongo-database
